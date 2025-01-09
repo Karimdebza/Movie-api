@@ -1,0 +1,26 @@
+
+services:
+  # DataBase
+  db:
+    image: mysql:8.0
+    container_name: movie_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+
+
+  # phpMyAdmin
+  myadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_Movie
+    ports:
+      - 82:80
+    links:
+      - db:mysql_host
+    environment:
+      - PMA_HOST=mysql_host
+      - PMA_PORT=$PMA_PORT
